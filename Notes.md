@@ -19,6 +19,8 @@ Is saved as the Schema variable.
 
 Read more: http://mongoosejs.com/docs/guide.html
 
+Snippet: https://github.com/nashio/vim-snippets
+
 # ODM tool
 
 A document in Mongoose is an instance of the model.
@@ -97,7 +99,7 @@ var simpleSchema = new Schema({ fieldName: SchemaType});
 	    createdOn: { type: Date, default: Date.now },
 	    isActive: { type: Boolean, default: true },
 });
-``
+```
 
 # Model Example
 
@@ -201,4 +203,176 @@ var simpleSchema = new Schema({ fieldName: SchemaType});
 	var query = Standup.findById(id, '-impediment');
 ```
 
+## Find where
 
+Chain where methods together
+
+Where discount is greather then 10 and less then 20 - and zipCode is 12345
+
+```
+	// Chain where methods together
+	// Where discount is greather then 10 and less then 20 - and zipCode is 12345
+	Customer.where('discount').gte(10).lt(20)
+			.where('zipCode', '12345')
+			.exec(function(err, results) {
+				if (err) throw err;
+				console.log(results);
+			});
+```
+
+| $gt  | greater than             |
+|------|--------------------------|
+| $gte | greater than or equal to |
+| $in  | exists in                |
+| $lt  | less than                |
+| $lte | less than or equal to    |
+| $ne  | not equal to             |
+| $nin | does not exist           |
+
+# Updating
+
+Find by id - Id parameter
+Then updating the found object
+
+Makes two calls to the db, first it finds the document, then updates it.
+
+```
+	// Find by id - Id parameter
+	// Then updating the found object
+
+	Standup.findById(id).exec(function (err, doc) {
+		// handle any errors
+		if (err) return errorHandler(err);
+
+		// Update the found document - impediment field
+		doc.impediment('None');
+		doc.save(function (err) {
+			if (err) return errorHandler(err);
+			console.log('This shit was updated');
+		});
+	)};
+```
+
+Best practice
+ Specity the query condition
+ And then the updated info
+```
+	var condition = { memberName: 'Mary' };
+	var update = { impediment: 'None - some shit' };
+
+	Standup.update(condition, update, function(err, numberAffected, rawResponse) {
+		// Error or result - same old
+	});
+
+	// Finding a document - then updating it.
+	Standup.findOne({ memberName: 'Mary'}, function(err, doc) {
+		// Handle errors here - Validate document results
+		doc.impediment = 'None - Updated the impediment object';
+		doc.save(function (err) {
+			// Handle Errors
+		});
+	});
+```
+
+# Validation
+
+| Schema Type | Built-in Validators                |
+|-------------|---------------------|------|-------|
+| String      | required            | enum | match |
+| Number      | required            | min  | max   |
+| Date        | required            |      |       |
+| Buffer      | required            |      |       |
+| Boolean     | required            |      |       |
+| Mixed       | required            |      |       |
+| ObjectId    | required            |      |       |
+| Array       | required            |      |       |
+
+Required validation example
+
+Name should be a Sting, and is required
+
+```
+
+	var customerSchema = new Schema({
+		name:       { type: String, required: true},
+		address:    String,
+		city:       String,
+		state:      String,
+		country:    String,
+		zipCode:    number,
+		createdOn:  Date,
+		isActive:   Boolean,
+	});
+
+	// After the schema is defined
+	customerSchema.path('city').required(true, 'Ingen by');
+	// The path is the field name.
+
+	/* Regular Expresion */
+
+	var reMatch = /[a-zA-Z]/;
+	var customerSchema = new Schema({
+		name: {type: String,
+				required: true;
+				match: reMatch },
+	});
+
+	// Defining a regex as the reMatch, then applying it as a match parameter.
+
+	/* Enum validation */
+
+	// String - enum validation - should match within the array
+	var array = ['none', 'minor', 'blocking', 'severe'];
+
+	var standupSchema = new Schema ({
+		impediments: { type: String,
+						required: true,
+						enum: array }
+	}
+```
+
+## Basic number validation
+
+Customer must receive at least a 5% discount
+
+```
+	var customerSchema = new Schema({
+		name: String
+		discount: { type: Number, min: 5 }
+	});
+
+	// At least 60%
+	var customerSchema = new Schema({
+		name: String
+		discount: { type: Number, max: 60 }
+	});
+```
+# Middleware
+
+```
+	// Middleware flow
+
+	var personSchema = new Schema({
+		firstName: { type: String, required: true },
+		lastName: { type: String, required: true },
+		status: { type: String, required: true, default: 'Alive' }
+	});
+	// If no value is applied, the default is 'Aliv'
+
+	// Build a model from the person schema
+	var Person = new.mongoose.model.('Person', personSchema);
+
+	// New document instance of a person model
+	var newPerson = new Person( { firstNAme: 'John', lastName: 'Doe'} );
+
+	// Save the document - Validation (required) is instanciated now
+	newPerson.save(function (err) {
+		if (err) return handleError(err);
+		// Saved the person
+	});
+
+```
+
+### FLow
+
+Save -> Defaults Applied -> Validation -> Error

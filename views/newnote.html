@@ -31,6 +31,11 @@
 			<div class="text-center">
 				<h1>Scrub</h1>
 				<img src="images/scrum.gif" alt="Fuck yea' scrum"/>
+				{% if message.length > 0 %}
+				<div class="alert alert-danger alert-error">
+					{{ message }}
+				</div>
+				{% endif %}
 			</div>
 
 			<form class="form-horizontal" action="newnote" method="post">
@@ -42,10 +47,10 @@
 						<div class="col-md-4">
 							<select id="memberName" name="memberName" class="form-control">
 								<option value="None">(Select Name)</option>
-								<option value="Mark">Richard</option>
-								<option value="David">Erlich</option>
-								<option value="John">Dinesh</option>
-								<option value="Mary">Bertram</option>
+								<option value="Richard">Richard</option>
+								<option value="Erlich">Erlich</option>
+								<option value="Dinesh">Dinesh</option>
+								<option value="Bertram">Bertram</option>
 							</select>
 						</div>
 					</div>

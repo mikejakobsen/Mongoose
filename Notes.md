@@ -10,6 +10,17 @@ d) db.retaurants.remove({cuisine : "Hamburgers", "grades.score" : {$lt : 1}})
 
 # Mongoose
 
+```
+	var mongoose = require('mongoose');
+	var Schema = mongoose.Schema;
+```
+First Mongoose is required to the Mongoose variable - then the Schema objekt within mongoose.
+Is saved as the Schema variable.
+
+Read more: http://mongoosejs.com/docs/guide.html
+
+# OLM
+
 A document in Mongoose is simply an instance of the model.
 
 ´´
@@ -43,3 +54,16 @@ var Schema = mongoose.Schema;
 ´´
 
 var simpleSchema = new Schema({ fieldName: SchemaType});
+
+## Data types
+
+| Mongoose Schema Types | Javascript Data Types |
+|-----------------------|-----------------------|
+| String                | String                |
+| Number                | Number                |
+| Date                  | Object                |
+| Buffer                | Object                |
+| Boolean               | Boolean               |
+| Mixed                 | Object                |
+| ObjecId               | Object                |
+| Array                 | Array(Object)         |

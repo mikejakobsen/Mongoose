@@ -1,4 +1,4 @@
-/* Model Example - to remember the sunyax */
+/* Model Example - to remember the syntax */
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;

@@ -8,13 +8,17 @@ exports.list = function(req, res) {
         .exec(function(err, results) {
             //res.send(results);
             res.render('index', { title: 'Standup - List', notes: results });
+            // Results is used in the Index page loop
+            // {% for note in notes %}
         });
 };
 
 exports.filterByMember = function(req, res) {
     var query = Standup.find();
+    // Select membername from the query
     var filter = req.body.memberName;
 
+    // Sort by CreatedOn descending
     query.sort({ createdOn: 'desc' });
 
     if (filter.length > 0)

@@ -19,9 +19,9 @@ Is saved as the Schema variable.
 
 Read more: http://mongoosejs.com/docs/guide.html
 
-# OLM
+# ODM tool
 
-A document in Mongoose is simply an instance of the model.
+A document in Mongoose is an instance of the model.
 
 ´´
 var Person = mongoose.model('Person', personSchema);

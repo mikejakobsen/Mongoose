@@ -8,6 +8,12 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+// Mongoose ODM
+var mongoose = require('mongoose');
+
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost/mongoose');
+
 var app = express();
 
 // Use Swip instead

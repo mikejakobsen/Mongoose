@@ -12,35 +12,4 @@ var standupSchema = new Schema({
     createdOn: { type: Date, default: Date.now }
 });
 
-
-// Seperating name and middlename
-var includeMiddleName = true;
-
-var exampleSchema = new Schema;
-
-if (includeMiddleName) {
-	exampleSchema.add({ 
-		memberName: { 
-			first: String,
-			middle: String,
-			last: String
-		}
-	});
-} else {
-	exampleSchema.add({ 
-		memberName: { 
-			first: String,
-			last: String
-		}
-	});
-}
-
-exampleSchema.add({
-	project: String,
-    workYesterday: String,
-    workToday: String,
-    impediment: String,
-    createdOn: { type: Date, default: Date.now }
-});
-
-
+module.exports = mongoose.model( 'Standup', standupSchema );

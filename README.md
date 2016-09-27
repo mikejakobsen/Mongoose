@@ -16,7 +16,7 @@ http://mongoosejs.com
 
 ## Basic Syntax
 
-```
+```Javascript
 	var mongoose = require('mongoose');
 	mongoose.connect('mongodb://localhost/test');
 
@@ -45,7 +45,7 @@ d) db.retaurants.remove({cuisine : "Hamburgers", "grades.score" : {$lt : 1}})
 
 # Mongoose
 
-```
+```Javascript
 	var mongoose = require('mongoose');
 	var Schema = mongoose.Schema;
 ```

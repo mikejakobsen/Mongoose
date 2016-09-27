@@ -35,13 +35,13 @@ http://mongoosejs.com
 
 ### Mongo Excercise
 
-a) db.getCollection("retaurants").find({name:"Mackies"})
+a) db.getCollection("restaurants").find({name:"Mackies"})
 
-b) db.getCollection("retaurants").find({cuisine:"Italian", "grades.score" : {$gt : 50}}).sort({"adress.zipcode" : 1})
+b) db.getCollection("restaurants").find({cuisine:"Italian", "grades.score" : {$gt : 50}}).sort({"adress.zipcode" : 1})
 
-c) db.retaurants.update({"restaurant_id" : "55555555"}, {$push : {grades : {date : Date(), grade : "A", score : 666}}})
+c) db.restaurants.update({"restaurant_id" : "55555555"}, {$push : {grades : {date : Date(), grade : "A", score : 666}}})
 
-d) db.retaurants.remove({cuisine : "Hamburgers", "grades.score" : {$lt : 1}})
+d) db.restaurants.remove({cuisine : "Hamburgers", "grades.score" : {$lt : 1}})
 
 # Mongoose
 

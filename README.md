@@ -35,7 +35,13 @@ http://mongoosejs.com
 
 ### Mongo Excercise
 
-a) db.getCollection("restaurants").find({name:"Mackies"})
+Dummy data:
+https://raw.githubusercontent.com/mongodb/docs-assets/primer-dataset/primer-dataset.json
+
+mongoimport --db dummy-data --collection restaurants --drop --file filename.json
+
+
+a) db.getCollection("restaurants").find({name:"Taste The Tropics Ice Cream"})
 
 b) db.getCollection("restaurants").find({cuisine:"Italian", "grades.score" : {$gt : 50}}).sort({"adress.zipcode" : 1})
 
